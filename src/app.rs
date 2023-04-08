@@ -39,5 +39,11 @@ fn HomePage(cx: Scope) -> impl IntoView {
         <h1>"Welcome to Profiteer"</h1>
         <h2>"Enter your information below to log in."</h2>
         <button on:click=on_click>"Click Me: " {count}</button>
+        <h3>"First Name"</h3>
+        <input type="text" fname="fname"></input>
+        <h3>"Last Name"</h3>
+        <input type="text" lname="lname"></input>
+        <h3>"Email"</h3>
+        <input type="email" email="email"></input>
     }
 }
