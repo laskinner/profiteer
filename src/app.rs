@@ -33,10 +33,10 @@ pub fn App(cx: Scope) -> impl IntoView {
 fn HomePage(cx: Scope) -> impl IntoView {
     // Creates a reactive value to update the button
     
-    let (customers_start, set_customers_start) = create_signal(cx, "Enter number".to_string());
-    let (customers_end, set_customers_end) = create_signal(cx, "Enter number".to_string());
-    let (customers_added, set_customers_added) = create_signal(cx, "Enter number".to_string());
-    
+    let (customers_start, set_customers_start) = create_signal(cx, "Enter value".to_string());
+    let (customers_end, set_customers_end) = create_signal(cx, "Enter value".to_string());
+    let (customers_added, set_customers_added) = create_signal(cx, "Enter value".to_string());
+   
     view! { cx,
         <h1>"Welcome to Profiteer"</h1>
         
