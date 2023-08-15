@@ -34,41 +34,50 @@ fn HomePage(cx: Scope) -> impl IntoView {
     // Churn Rate 
     
     let (customers_start, set_customers_start) = create_signal(cx, 1);
-    let (customers_end, set_customers_end) = create_signal(cx, 0);
-    let (customers_added, set_customers_added) = create_signal(cx, 0);
-    let churn = move || (customers_start() - customers_end()) / customers_start() * 100;
+    let (customers_end, set_customers_end) = create_signal(cx, 1);
+    let (customers_added, set_customers_added) = create_signal(cx, 1);
+    let total_customers_lost = move || customers_start() - customers_end() + customers_added();
+    let net_customers_lost = move || customers_start() - customers_end();
+    let churn = move || net_customers_lost() as f32 / customers_start() as f32 * 100.0;
     
     // Revenue Churn
     
     view! { cx,
         <h1>"Welcome to Profiteer"</h1>
         
-        <form><label>"Enter the number of customers at the start of the period "
+        <h2>"Instructions: Provide values for the business period."</h2>
+        
+        <h2>"Beginning of period"</h2>
+        
+        <form><label>"Number of customers "
             <input type="text" on:input=move |ev| {
             set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
         } prop:value=customers_start
         />
         </label></form>
+
+        <h2>"End of period"</h2>
         
-        <form><label>"Enter the number of customers at the end of the period "
+        <form><label>"Number of Customers "
             <input type="text" on:input=move |ev| {
             set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
         } prop:value=customers_end
         />
         </label></form>
     
-        <form><label>"Enter the number of customers added during the period "
+        <h2>"During the period"</h2>
+
+        <form><label>"Customers added "
             <input type="text" on:input=move |ev| {
             set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
         } prop:value=customers_added
         />
         </label></form>
  
-        <p>"Number of Customers at start of period: " {customers_start}</p>
-        <p>"Number of Customers at end of period: " {customers_end}</p>
-        <p>"Number of Customers added during period: " {customers_added}</p>
-
-
+        <p>"Current Customers: " {customers_end}</p>
+        <p>"New Customers added: " {customers_added}</p>
+        <p>"Total Customers Lost: " {total_customers_lost}</p>
+        <p>"Net Customers Lost: " {net_customers_lost}</p>
         <p>"Churn rate: " {churn}"%"</p>
     }   
 }
