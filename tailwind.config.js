@@ -4,10 +4,11 @@ module.exports = {
     files: ["*.html", "./src/**/*.rs"],
   },
   theme: {
-    extend: {"synthwave"},
+    extend: {},
   },
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
-  daisyui: {
-    themes:  ["synthwave"],
-  },
+  plugins: [require("@tailwindcss/typography")],
+//  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+ // daisyui: {
+  //  themes:  [],
+//  },
 }

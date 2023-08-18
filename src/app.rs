@@ -43,10 +43,13 @@ fn HomePage(cx: Scope) -> impl IntoView {
     // Revenue Churn
     
     view! { cx,
+         <main class="my-0 mx-auto max-w-3xl text-center">
         <h1>"Welcome to Profiteer"</h1>
+            </main>
+<article class="prose lg:prose-xl">
         
         <h2>"Instructions: Provide values for the business period."</h2>
-        
+</article>        
         <h2>"Beginning of period"</h2>
         
         <form><label>"Number of customers "
