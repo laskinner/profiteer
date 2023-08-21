@@ -9,7 +9,6 @@ pub fn App(cx: Scope) -> impl IntoView {
 
     view! {
         cx,
-
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/leptos_start.css"/>
@@ -17,7 +16,9 @@ pub fn App(cx: Scope) -> impl IntoView {
         // sets the document title
         <Title text="Profiteer"/>
 
-        // content for this welcome page
+        <body class="bg-gray-900/90">
+            // content for this welcome page
+        <h1 class="text-center text-xl text-white">"Welcome to Profiteer"</h1>
         <Router>
             <main>
                 <Routes>
@@ -25,6 +26,7 @@ pub fn App(cx: Scope) -> impl IntoView {
                 </Routes>
             </main>
         </Router>
+        </body>
     }
 }
 
@@ -43,41 +45,41 @@ fn HomePage(cx: Scope) -> impl IntoView {
     // Revenue Churn
     
     view! { cx,
-        <h1>"Welcome to Profiteer"</h1>
-        
-        <h2>"Instructions: Provide values for the business period."</h2>
-        
-        <h2>"Beginning of period"</h2>
-        
-        <form><label>"Number of customers "
-            <input type="text" on:input=move |ev| {
-            set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
-        } prop:value=customers_start
-        />
-        </label></form>
+        <main class="p-6 max-w-lg mx-auto rounded-xl shadow-lg items-center space-x-4 text-lime-400 bg-violet-600/50">
+            <div class="text-center">
+                <h2>"Instructions: Provide values for the business period."</h2>
+                <h2>"Beginning of period"</h2>
 
-        <h2>"End of period"</h2>
-        
-        <form><label>"Number of Customers "
-            <input type="text" on:input=move |ev| {
-            set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
-        } prop:value=customers_end
-        />
-        </label></form>
-    
-        <h2>"During the period"</h2>
+                    <label>"Number of customers "
+                        <input type="text" on:input=move |ev| {
+                        set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=customers_start/>
+                    </label>
 
-        <form><label>"Customers added "
-            <input type="text" on:input=move |ev| {
-            set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
-        } prop:value=customers_added
-        />
-        </label></form>
- 
-        <p>"Current Customers: " {customers_end}</p>
-        <p>"New Customers added: " {customers_added}</p>
-        <p>"Total Customers Lost: " {total_customers_lost}</p>
-        <p>"Net Customers Lost: " {net_customers_lost}</p>
-        <p>"Churn rate: " {churn}"%"</p>
+                <h2>"End of period"</h2>
+                
+                    <label>"Number of Customers "
+                        <input type="text" on:input=move |ev| {
+                        set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=customers_end/>
+                    </label>
+                
+                <h2>"During the period"</h2>
+
+                    <label>"Customers added "
+                        <input type="text" on:input=move |ev| {
+                        set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=customers_added/>
+                    </label>
+           </div> 
+            <ul class="p-6 divide-y divide-slate-200"> 
+                <p>"Current Customers: " {customers_end}</p>
+                <p>"New Customers: " {customers_added}</p>
+                <p>"Total Customers Lost: " {total_customers_lost}</p>
+                <p>"Net Customers Lost: " {net_customers_lost}</p>
+                <p>"Churn rate: " {churn}"%"</p>
+            </ul>
+         
+        </main>
     }   
 }
