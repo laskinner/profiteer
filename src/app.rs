@@ -45,41 +45,48 @@ fn HomePage(cx: Scope) -> impl IntoView {
     // Revenue Churn
     
     view! { cx,
-        <main class="p-6 max-w-lg mx-auto rounded-xl shadow-lg items-center space-x-4 text-lime-400 bg-violet-600/50">
+        <main class="p-6 max-w-lg mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
             <div class="text-center">
                 <h2>"Instructions: Provide values for the business period."</h2>
-                <h2>"Beginning of period"</h2>
+            </div>
+            </main>
+            <div class="container mp-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mp-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
+                        <p>"Beginning of period"</p>
 
-                    <label>"Number of customers "
-                        <input type="text" on:input=move |ev| {
-                        set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
-                        } prop:value=customers_start/>
-                    </label>
+                            <label>"Number of customers "
+                                <input type="text" on:input=move |ev| {
+                                set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
+                                } prop:value=customers_start/>
+                            </label>
 
-                <h2>"End of period"</h2>
-                
-                    <label>"Number of Customers "
-                        <input type="text" on:input=move |ev| {
-                        set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
-                        } prop:value=customers_end/>
-                    </label>
-                
-                <h2>"During the period"</h2>
+                        <h2>"End of period"</h2>
+                        
+                            <label>"Number of Customers "
+                                <input type="text" on:input=move |ev| {
+                                set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
+                                } prop:value=customers_end/>
+                            </label>
+                        
+                        <h2>"During the period"</h2>
 
-                    <label>"Customers added "
-                        <input type="text" on:input=move |ev| {
-                        set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
-                        } prop:value=customers_added/>
-                    </label>
-           </div> 
-            <ul class="p-6 divide-y divide-slate-200"> 
-                <p>"Current Customers: " {customers_end}</p>
-                <p>"New Customers: " {customers_added}</p>
-                <p>"Total Customers Lost: " {total_customers_lost}</p>
-                <p>"Net Customers Lost: " {net_customers_lost}</p>
-                <p>"Churn rate: " {churn}"%"</p>
-            </ul>
-         
-        </main>
-    }   
+                            <label>"Customers added "
+                                <input type="text" on:input=move |ev| {
+                                set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
+                                } prop:value=customers_added/>
+                            </label>
+                    </div>
+                </div>
+            <div class="mp-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
+                <ul class="p-6 divide-y divide-slate-200"> 
+                    <p>"Current Customers: " {customers_end}</p>
+                    <p>"New Customers: " {customers_added}</p>
+                    <p>"Total Customers Lost: " {total_customers_lost}</p>
+                    <p>"Net Customers Lost: " {net_customers_lost}</p>
+                    <p>"Churn rate: " {churn}"%"</p>
+                </ul>
+            </div>
+            </div>
+        }   
 }
