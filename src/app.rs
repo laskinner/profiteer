@@ -18,14 +18,15 @@ pub fn App(cx: Scope) -> impl IntoView {
 
         <body class="bg-gray-900/90">
             // content for this welcome page
-        <h1 class="text-center text-xl text-white">"Welcome to Profiteer"</h1>
-        <Router>
-            <main>
-                <Routes>
-                    <Route path="" view=|cx| view! { cx, <HomePage/> }/>
-                </Routes>
-            </main>
-        </Router>
+            <h1 class="text-center text-xl text-white">"Welcome to Profiteer"</h1>
+            <h2 class="text-center text-xl text-white">"Instructions: Provide values for the business period."</h2>
+            <Router>
+                <main>
+                    <Routes>
+                        <Route path="" view=|cx| view! { cx, <HomePage/> }/>
+                    </Routes>
+                </main>
+            </Router>
         </body>
     }
 }
@@ -45,41 +46,35 @@ fn HomePage(cx: Scope) -> impl IntoView {
     // Revenue Churn
     
     view! { cx,
-        <main class="p-6 max-w-lg mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
-            <div class="text-center">
-                <h2>"Instructions: Provide values for the business period."</h2>
-            </div>
-            </main>
-            <div class="container mp-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="mp-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
-                        <p>"Beginning of period"</p>
+        <main> 
+            <div class="grid grid-cols-2 gap-4">
+                <div class="mp-6 p-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
+                    <p class="text-2xl text-center">"Beginning of period"</p>
 
-                            <label>"Number of customers "
-                                <input type="text" on:input=move |ev| {
-                                set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
-                                } prop:value=customers_start/>
-                            </label>
+                        <label>"Number of customers "
+                            <input type="text" class="float-right" on:input=move |ev| {
+                            set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
+                            } prop:value=customers_start/>
+                        </label>
 
-                        <h2>"End of period"</h2>
-                        
-                            <label>"Number of Customers "
-                                <input type="text" on:input=move |ev| {
-                                set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
-                                } prop:value=customers_end/>
-                            </label>
-                        
-                        <h2>"During the period"</h2>
+                    <p class="text-2xl text-center">"End of period"</p>
+                    
+                        <label>"Number of Customers "
+                            <input type="text" class="float-right" on:input=move |ev| {
+                            set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
+                            } prop:value=customers_end/>
+                        </label>
+                    
+                    <p class="text-2xl text-center">"During the period"</p>
 
-                            <label>"Customers added "
-                                <input type="text" on:input=move |ev| {
-                                set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
-                                } prop:value=customers_added/>
-                            </label>
-                    </div>
+                        <label>"Customers added "
+                            <input type="text" class="float-right" on:input=move |ev| {
+                            set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
+                            } prop:value=customers_added/>
+                        </label>
                 </div>
             <div class="mp-6 mx-auto rounded-xl items-center space-x-4 text-lime-400 bg-violet-600/50">
-                <ul class="p-6 divide-y divide-slate-200"> 
+                <ul class="p-6 divide-y divide-slate-200 text-right"> 
                     <p>"Current Customers: " {customers_end}</p>
                     <p>"New Customers: " {customers_added}</p>
                     <p>"Total Customers Lost: " {total_customers_lost}</p>
@@ -88,5 +83,6 @@ fn HomePage(cx: Scope) -> impl IntoView {
                 </ul>
             </div>
             </div>
+        </main>
         }   
 }
