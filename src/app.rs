@@ -27,13 +27,13 @@ pub fn App(cx: Scope) -> impl IntoView {
                 </div>
               </div>
             </nav>
-        // sets the document title
+            
+       // sets the document title
         <Title text="Profiteer"/>
 
-        <body class="bg-slate-950">
+        <body class="bg-background-50">
             // content for this welcome page
-            <h1 class="text-center text-4xl text-white pt-4">"Welcome to Profiteer"</h1>
-            <h2 class="text-center text-xl text-white pb-10">"Instructions: Provide values for the business period."</h2>
+            <h2 class="text-center text-xl text-slate-900 pb-10 pt-10">"Instructions: Provide values for the business period."</h2>
             <Router>
                 <main>
                     <Routes>
@@ -62,7 +62,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
     view! { cx,
         <main>
             <div class="grid grid-cols-2 gap-4">
-                <div class="mp-6 p-6 mx-auto rounded-xl items-center space-x-4 text-white bg-indigo-600">
+                <div class="mp-6 p-6 mx-auto rounded-xl items-center space-x-4 text-slate-900">
 
                     <p class="text-2xl text-center">"Beginning of period"</p>
 
