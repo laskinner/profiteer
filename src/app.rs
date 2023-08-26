@@ -12,16 +12,15 @@ pub fn App(cx: Scope) -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/leptos_start.css"/>
-            <nav class="bg-gradient-to-r from-cyan-300 to-blue-600">
+            <nav class="bg slate-900">
               <div class="container mx-auto px-4">
-                <div class="flex items-center justify-between h-16">
+                <div class="flex items-center justify-between yf-16">
                   <div class="flex items-center">
-                    <a href="images.com" class="text-white font-bold text-lg">"Profiteer"</a>
+                    <a href="www.google.com" class="text-slate-900 font-bold text-lg">"Profiteer"</a>
                   </div>
                   <div class="flex items-center">
                     <a href="www.google.com" class="text-white hover:text-gray-300 px-3 py-2">"Home"</a>
                     <a href="www.facebook.com" class="text-white hover:text-gray-300 px-3 py-2">"About"</a>
-                    <a href="www.openai.com" class="text-white hover:text-gray-300 px-3 py-2">"Services"</a>
                     <a href="www.bing.com" class="text-white hover:text-gray-300 px-3 py-2">"Contact"</a>
                   </div>
                 </div>

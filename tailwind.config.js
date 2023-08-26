@@ -10,7 +10,7 @@ module.exports = {
     colors: {
       primary: colors.indigo,
       secondary: colors.blue,
-      background: colors.emerald,
+      background: colors.slate,
       text: colors.emerald,
       link: colors.indigo,
       button: colors.cyan,
