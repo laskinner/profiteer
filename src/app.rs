@@ -20,11 +20,16 @@ pub fn App(cx: Scope) -> impl IntoView {
                 <img src="logo-white.png" alt="Logo" class="max-w-xs"></img>
                    // <a href="www.google.com" class="text-gray-300 font-bold text-lg">"Profiteer"</a>
                   </div>
-                  <div class="flex items-center">
+                   <div class="space-y-2">
+                      <div class="w-8 h-0.5 bg-white"></div>
+                      <div class="w-8 h-0.5 bg-white"></div>
+                      <div class="w-8 h-0.5 bg-white"></div>
+                    </div>
+           /*       <div class="flex items-center">
                     <a href="www.google.com" class="text-white hover:text-gray-300 px-3 py-2">"Home"</a>
                     <a href="www.facebook.com" class="text-white hover:text-gray-300 px-3 py-2">"About"</a>
                     <a href="www.bing.com" class="text-white hover:text-gray-300 px-3 py-2">"Contact"</a>
-                  </div>
+                  </div> */
                 </div>
               </div>
             </div>
@@ -70,7 +75,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
 
                     <div class="flex float-right">
                         <label for="input" class="mr-2">"Number of customers:"</label>
-                            <input type="text" class="flex-shrink rounded-full border text-center bg-indigo-300" on:input=move |ev| {
+                            <input type="text" class="flex-shrink rounded-md text-center bg-indigo-300" on:input=move |ev| {
                             set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_start/>
                     </div>
@@ -79,7 +84,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
                     
                     <div class="flex float-right">
                         <label for="input" class="mr-2">"Number of Customers:"</label>
-                            <input type="text" class="flex-shrink rounded border text-center bg-indigo-300" on:input=move |ev| {
+                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
                             set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_end/>
                     </div>
@@ -88,7 +93,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
 
                     <div class="flex float-right">
                         <label for="input" class="mr-2">"Customers added:"</label>
-                            <input type="text" class="flex-shrink rounded-lg border text-center bg-indigo-300" on:input=move |ev| {
+                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
                             set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_added/>
                     </div>
