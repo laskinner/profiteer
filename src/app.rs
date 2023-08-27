@@ -12,11 +12,13 @@ pub fn App(cx: Scope) -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/leptos_start.css"/>
-            <nav class="bg slate-900">
+            <nav>
+            <div class="bg bg-slate-950 leading-10">
               <div class="container mx-auto px-4">
-                <div class="flex items-center justify-between yf-16">
+                    <div class="flex items-center justify-between yf-16">
                   <div class="flex items-center">
-                    <a href="www.google.com" class="text-slate-900 font-bold text-lg">"Profiteer"</a>
+                <img src="logo-white.png" alt="Logo" class="max-w-xs"></img>
+                   // <a href="www.google.com" class="text-gray-300 font-bold text-lg">"Profiteer"</a>
                   </div>
                   <div class="flex items-center">
                     <a href="www.google.com" class="text-white hover:text-gray-300 px-3 py-2">"Home"</a>
@@ -25,12 +27,13 @@ pub fn App(cx: Scope) -> impl IntoView {
                   </div>
                 </div>
               </div>
+            </div>
             </nav>
             
        // sets the document title
         <Title text="Profiteer"/>
 
-        <body class="bg-background-50">
+        <body class="bg-amber-100">
             // content for this welcome page
             <h2 class="text-center text-xl text-slate-900 pb-10 pt-10">"Instructions: Provide values for the business period."</h2>
             <Router>
@@ -67,7 +70,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
 
                     <div class="flex float-right">
                         <label for="input" class="mr-2">"Number of customers:"</label>
-                            <input type="text" class="flex-shrink rounded border text-white bg-indigo-300" on:input=move |ev| {
+                            <input type="text" class="flex-shrink rounded-full border text-center bg-indigo-300" on:input=move |ev| {
                             set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_start/>
                     </div>
@@ -76,7 +79,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
                     
                     <div class="flex float-right">
                         <label for="input" class="mr-2">"Number of Customers:"</label>
-                            <input type="text" class="flex-shrink rounded border text-white bg-indigo-300" on:input=move |ev| {
+                            <input type="text" class="flex-shrink rounded border text-center bg-indigo-300" on:input=move |ev| {
                             set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_end/>
                     </div>
@@ -85,13 +88,13 @@ fn HomePage(cx: Scope) -> impl IntoView {
 
                     <div class="flex float-right">
                         <label for="input" class="mr-2">"Customers added:"</label>
-                            <input type="text" class="flex-shrink rounded border text-white bg-indigo-300" on:input=move |ev| {
+                            <input type="text" class="flex-shrink rounded-lg border text-center bg-indigo-300" on:input=move |ev| {
                             set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_added/>
                     </div>
             </div>
-            <div class="mp-6 mx-auto rounded-xl items-center space-x-4 text-white bg-indigo-600">
-                <ul class="p-6 divide-y divide-slate-200 text-right"> 
+            <div class="mp-6 mx-auto rounded-xl text-2xl items-center space-x-4 text-slate-900">
+                <ul class="p-6 divide-y-2 divide-slate-700 text-right"> 
                     <p>"Current Customers: " {customers_end}</p>
                     <p>"New Customers: " {customers_added}</p>
                     <p>"Total Customers Lost: " {total_customers_lost}</p>
