@@ -60,9 +60,15 @@ fn HomePage(cx: Scope) -> impl IntoView {
     let (customers_start, set_customers_start) = create_signal(cx, 1);
     let (customers_end, set_customers_end) = create_signal(cx, 1);
     let (customers_added, set_customers_added) = create_signal(cx, 1);
+    let (product_name, set_product_name) = create_signal(cx, 1);
+    let (product_price, set_product_price) = create_signal(cx, 1);
     let total_customers_lost = move || customers_start() - customers_end() + customers_added();
     let net_customers_lost = move || customers_start() - customers_end();
     let churn = move || net_customers_lost() as f32 / customers_start() as f32 * 100.0;
+    let arr = move || customers_end() * product_price() * 100;
+    let mrr = move || customers_end() * product_price();
+    let mrr_diff = move || (customers_start() * product_price()) - (customers_end() * product_price());
+    let arr_diff = move || (customers_start() * product_price() * 100) - (customers_end() * product_price() * 100);
     
     // Revenue Churn
     
@@ -97,6 +103,22 @@ fn HomePage(cx: Scope) -> impl IntoView {
                             set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
                             } prop:value=customers_added/>
                     </div>
+
+                    <p class="text-2xl text-center">"Product Names"</p>
+
+                    <div class="flex float-right">
+                        <label for="input" class="mr-2">"Product Name:"</label>
+                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
+                            set_product_price(event_target_value(&ev).parse::<i32>().unwrap());
+                            } prop:value=product_name/>
+            </div>
+                    <p class="text-2xl text-center">"Product Names"</p>
+                    <div class="flex float-right">
+                        <label for="input" class="mr-2">"Product Price:"</label>
+                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
+                            set_product_price(event_target_value(&ev).parse::<i32>().unwrap());
+                            } prop:value=product_price/>
+                    </div>
             </div>
             <div class="mp-6 mx-auto rounded-xl text-2xl items-center space-x-4 text-slate-900">
                 <ul class="p-6 divide-y-2 divide-slate-700 text-right"> 
@@ -105,6 +127,10 @@ fn HomePage(cx: Scope) -> impl IntoView {
                     <p>"Total Customers Lost: " {total_customers_lost}</p>
                     <p>"Net Customers Lost: " {net_customers_lost}</p>
                     <p>"Churn rate: " {churn}"%"</p>
+                    <p>"Monthly Recurring Revenue: ""$"{mrr}</p> 
+                    <p>"Annual Recurring Revenue: ""$"{arr}</p>
+                    <p>"MRR Difference: ""$"{mrr_diff}</p>
+                    <p>"ARR Difference: ""$"{arr_diff}</p>
                 </ul>
             </div>
             </div>
