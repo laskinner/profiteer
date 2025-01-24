@@ -34,7 +34,7 @@ pub fn App(cx: Scope) -> impl IntoView {
               </div>
             </div>
             </nav>
-            
+
        // sets the document title
         <Title text="Profiteer"/>
 
@@ -55,8 +55,8 @@ pub fn App(cx: Scope) -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn HomePage(cx: Scope) -> impl IntoView {
-    // Churn Rate 
-    
+    // Churn Rate
+
     let (customers_start, set_customers_start) = create_signal(cx, 1);
     let (customers_end, set_customers_end) = create_signal(cx, 1);
     let (customers_added, set_customers_added) = create_signal(cx, 1);
@@ -67,73 +67,76 @@ fn HomePage(cx: Scope) -> impl IntoView {
     let churn = move || net_customers_lost() as f32 / customers_start() as f32 * 100.0;
     let arr = move || customers_end() * product_price() * 100;
     let mrr = move || customers_end() * product_price();
-    let mrr_diff = move || (customers_start() * product_price()) - (customers_end() * product_price());
-    let arr_diff = move || (customers_start() * product_price() * 100) - (customers_end() * product_price() * 100);
-    
+    let mrr_diff =
+        move || (customers_start() * product_price()) - (customers_end() * product_price());
+    let arr_diff = move || {
+        (customers_start() * product_price() * 100) - (customers_end() * product_price() * 100)
+    };
+
     // Revenue Churn
-    
+
     view! { cx,
-        <main>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="mp-6 p-6 mx-auto rounded-xl items-center space-x-4 text-slate-900">
+    <main>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="mp-6 p-6 mx-auto rounded-xl items-center space-x-4 text-slate-900">
 
-                    <p class="text-2xl text-center">"Beginning of period"</p>
+                <p class="text-2xl text-center">"Beginning of period"</p>
 
-                    <div class="flex float-right">
-                        <label for="input" class="mr-2">"Number of customers:"</label>
-                            <input type="text" class="flex-shrink rounded-md text-center bg-indigo-300" on:input=move |ev| {
-                            set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
-                            } prop:value=customers_start/>
-                    </div>
+                <div class="flex float-right">
+                    <label for="input" class="mr-2">"Number of customers:"</label>
+                        <input type="text" class="flex-shrink rounded-md text-center bg-indigo-300" on:input=move |ev| {
+                        set_customers_start(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=customers_start/>
+                </div>
 
-                    <p class="text-2xl text-center">"End of period"</p>
-                    
-                    <div class="flex float-right">
-                        <label for="input" class="mr-2">"Number of Customers:"</label>
-                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
-                            set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
-                            } prop:value=customers_end/>
-                    </div>
-                    
-                    <p class="text-2xl text-center">"During the period"</p>
+                <p class="text-2xl text-center">"End of period"</p>
 
-                    <div class="flex float-right">
-                        <label for="input" class="mr-2">"Customers added:"</label>
-                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
-                            set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
-                            } prop:value=customers_added/>
-                    </div>
+                <div class="flex float-right">
+                    <label for="input" class="mr-2">"Number of Customers:"</label>
+                        <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
+                        set_customers_end(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=customers_end/>
+                </div>
 
-                    <p class="text-2xl text-center">"Product Names"</p>
+                <p class="text-2xl text-center">"During the period"</p>
 
-                    <div class="flex float-right">
-                        <label for="input" class="mr-2">"Product Name:"</label>
-                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
-                            set_product_price(event_target_value(&ev).parse::<i32>().unwrap());
-                            } prop:value=product_name/>
-            </div>
-                    <p class="text-2xl text-center">"Product Names"</p>
-                    <div class="flex float-right">
-                        <label for="input" class="mr-2">"Product Price:"</label>
-                            <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
-                            set_product_price(event_target_value(&ev).parse::<i32>().unwrap());
-                            } prop:value=product_price/>
-                    </div>
-            </div>
-            <div class="mp-6 mx-auto rounded-xl text-2xl items-center space-x-4 text-slate-900">
-                <ul class="p-6 divide-y-2 divide-slate-700 text-right"> 
-                    <p>"Current Customers: " {customers_end}</p>
-                    <p>"New Customers: " {customers_added}</p>
-                    <p>"Total Customers Lost: " {total_customers_lost}</p>
-                    <p>"Net Customers Lost: " {net_customers_lost}</p>
-                    <p>"Churn rate: " {churn}"%"</p>
-                    <p>"Monthly Recurring Revenue: ""$"{mrr}</p> 
-                    <p>"Annual Recurring Revenue: ""$"{arr}</p>
-                    <p>"MRR Difference: ""$"{mrr_diff}</p>
-                    <p>"ARR Difference: ""$"{arr_diff}</p>
-                </ul>
-            </div>
-            </div>
-        </main>
-        }   
+                <div class="flex float-right">
+                    <label for="input" class="mr-2">"Customers added:"</label>
+                        <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
+                        set_customers_added(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=customers_added/>
+                </div>
+
+                <p class="text-2xl text-center">"Product Names"</p>
+
+                <div class="flex float-right">
+                    <label for="input" class="mr-2">"Product Name:"</label>
+                        <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
+                        set_product_price(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=product_name/>
+        </div>
+                <p class="text-2xl text-center">"Product Names"</p>
+                <div class="flex float-right">
+                    <label for="input" class="mr-2">"Product Price:"</label>
+                        <input type="text" class="flex-shrink rounded-md border text-center bg-indigo-300" on:input=move |ev| {
+                        set_product_price(event_target_value(&ev).parse::<i32>().unwrap());
+                        } prop:value=product_price/>
+                </div>
+        </div>
+        <div class="mp-6 mx-auto rounded-xl text-2xl items-center space-x-4 text-slate-900">
+            <ul class="p-6 divide-y-2 divide-slate-700 text-right">
+                <p>"Current Customers: " {customers_end}</p>
+                <p>"New Customers: " {customers_added}</p>
+                <p>"Total Customers Lost: " {total_customers_lost}</p>
+                <p>"Net Customers Lost: " {net_customers_lost}</p>
+                <p>"Churn rate: " {churn}"%"</p>
+                <p>"Monthly Recurring Revenue: ""$"{mrr}</p>
+                <p>"Annual Recurring Revenue: ""$"{arr}</p>
+                <p>"MRR Difference: ""$"{mrr_diff}</p>
+                <p>"ARR Difference: ""$"{arr_diff}</p>
+            </ul>
+        </div>
+        </div>
+    </main>
+    }
 }
